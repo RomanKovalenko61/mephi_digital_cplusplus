@@ -7,6 +7,16 @@
 namespace ticket {
     enum class TicketType { Unlimited, Timed, Limited, Service };
 
+    inline std::string to_string(TicketType type) {
+        switch (type) {
+            case TicketType::Unlimited: return "Unlimited";
+            case TicketType::Timed: return "Timed";
+            case TicketType::Limited: return "Limited";
+            case TicketType::Service: return "Service";
+            default: return "Unknown";
+        }
+    }
+
     struct Owner {
         std::string fio;
         int age;

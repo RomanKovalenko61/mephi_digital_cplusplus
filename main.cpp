@@ -46,10 +46,8 @@ int main() {
     repo.add(timed->getTypeAndId(), std::move(timed_ticker));
     repo.add(unlim->getTypeAndId(), std::move(unlim_ticket));
 
-    for (auto &[key, value]: repo.copyStorage()) {
-        std::cout << "Key: " << static_cast<int>(key.first) << ", ID: " << key.second << std::endl;
-        value->print();
-    }
+    std::cout << "Repo size: " << repo.size() << std::endl;
+    std::cout << repo;
 
     return 0;
 }

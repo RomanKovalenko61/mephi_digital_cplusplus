@@ -21,5 +21,7 @@ namespace ticket {
         size_t size() const override;
 
         std::map<Key, Value> copyStorage() const;
+
+        friend std::ostream &operator<<(std::ostream &os, const MapRepoImpl &repo);
     };
 }

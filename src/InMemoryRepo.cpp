@@ -33,4 +33,12 @@ namespace ticket {
     std::map<IRepo::Key, IRepo::Value> MapRepoImpl::copyStorage() const {
         return storage;
     };
+
+    std::ostream &operator<<(std::ostream &os, const MapRepoImpl &repo) {
+        for (const auto &[key, value]: repo.copyStorage()) {
+            os << "Key: " << to_string(key.first) << ", ID: " << key.second << std::endl;
+            if (value) value->print();
+        }
+        return os;
+    }
 }
