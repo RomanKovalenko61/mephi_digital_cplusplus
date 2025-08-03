@@ -23,7 +23,7 @@ namespace ticket {
         char gender;
 
         void print_info(std::ostream &os) const {
-            os << fio << " " << age << " " << gender << std::endl;
+            os << "Owner: " << fio << " age: " << age << " gender: " << gender << std::endl;
         }
     };
 
