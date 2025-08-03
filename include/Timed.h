@@ -1,26 +1,30 @@
 #pragma once
 
+#include <chrono>
 #include "HavingCell.h"
 #include "IReplenishable.h"
 
 namespace ticket {
     class Timed : public HavingCell, public IReplenishable {
-        unsigned expiredAt{};
+        std::chrono::system_clock::time_point expiredAt{};
 
     public:
         Timed(const unsigned id, const Owner &owner, const unsigned cellId)
             : HavingCell(id, owner, cellId) {
+            expiredAt = std::chrono::system_clock::now();
         }
 
-        Timed &operator+=(unsigned amount) override {
-            expiredAt += amount;
+        Timed &operator+=(const unsigned days) override {
+            expiredAt += std::chrono::days(days);
             return *this;
         }
 
+        float replenish(unsigned amount) override;
+
         unsigned getRemains() override;
 
-        void print() const override {
-            std::cout << "Timed Ticket ID: " << std::endl;
-        }
+        void print() const override;
+
+        std::string getExpiredAtStr() const;
     };
 }

@@ -16,4 +16,5 @@ add_executable(mephi_digital_cplusplus main.cpp
         src/Limited.cpp
         include/Service.h
         src/Service.cpp
-        src/SkiPass.cpp)
+        src/SkiPass.cpp
+        include/Settings.h)

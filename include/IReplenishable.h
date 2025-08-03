@@ -13,5 +13,7 @@ namespace ticket {
         virtual SkiPass &operator+=(unsigned amount) = 0;
 
         virtual unsigned getRemains() = 0;
+
+        virtual float replenish(unsigned amount) = 0;
     };
 }

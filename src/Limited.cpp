@@ -1,11 +1,19 @@
 #include "../include/Limited.h"
+#include "../include/Settings.h"
 
 namespace ticket {
     unsigned Limited::getRemains() {
-        return 0; // Placeholder for getting remaining count logic
+        return count;
     }
 
     void Limited::print() const {
         std::cout << "Limited Ticket ID: " << std::endl;
+    }
+
+    float Limited::replenish(unsigned amount) {
+        auto price = static_cast<unsigned>(Settings::price_trip);
+        unsigned transfer = amount / price;
+        this->operator+=(transfer);
+        return static_cast<float>(amount - transfer * price);
     }
 }

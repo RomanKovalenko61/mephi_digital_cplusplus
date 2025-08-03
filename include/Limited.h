@@ -18,6 +18,8 @@ namespace ticket {
             return *this;
         }
 
+        float replenish(unsigned amount) override;
+
         unsigned getRemains() override;
 
         void print() const override;
