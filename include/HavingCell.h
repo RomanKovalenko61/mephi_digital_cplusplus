@@ -22,11 +22,21 @@ namespace ticket {
         }
 
         void open() {
-            is_open = true;
+            if (is_open) {
+                std::cout << "Cell with ID " << cellId << " already is opened" << std::endl;
+            } else {
+                std::cout << "Cell with ID " << cellId << " was open" << std::endl;
+                is_open = true;
+            }
         }
 
         void close() {
-            is_open = false;
+            if (!is_open) {
+                std::cout << "Cell with ID " << cellId << " already is closed" << std::endl;
+            } else {
+                std::cout << "Cell with ID " << cellId << " was close" << std::endl;
+                is_open = false;
+            }
         }
 
         bool isOpen() const {

@@ -26,6 +26,10 @@ int main() {
         unlim->getOwner().print_info(std::cout);
         std::cout << "Cell ID: " << unlim->getCellId() << std::endl;
         unlim->goThrough(1);
+        unlim->open();
+        unlim->open();
+        unlim->close();
+        unlim->close();
     }
 
     std::cout << " ----------------------------------------" << std::endl;
@@ -43,6 +47,10 @@ int main() {
         std::cout << "Cell ID: " << timed->getCellId() << std::endl;
         timed->goThrough(1);
         std::cout << std::boolalpha << timed->canGoThrough(2) << std::endl;
+        timed->open();
+        timed->open();
+        timed->close();
+        timed->close();
     }
 
     std::cout << " ----------------------------------------" << std::endl;
