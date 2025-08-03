@@ -15,5 +15,7 @@ namespace ticket {
         void operator()(const Owner &owner) override;
 
         void print() const override;
+
+        std::pair<TicketType, unsigned> getTypeAndId() const override;
     };
 }

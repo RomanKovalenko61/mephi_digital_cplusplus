@@ -26,5 +26,7 @@ namespace ticket {
         void print() const override;
 
         std::string getExpiredAtStr() const;
+
+        std::pair<TicketType, unsigned> getTypeAndId() const override;
     };
 }

@@ -40,7 +40,9 @@ namespace ticket {
 
         virtual void print() const = 0;
 
-        static std::unique_ptr<SkiPass> createTicket(TicketType type, unsigned id, const Owner &owner,
+        virtual std::pair<TicketType, unsigned> getTypeAndId() const = 0;
+
+        static std::shared_ptr<SkiPass> createTicket(TicketType type, unsigned id, const Owner &owner,
                                                      unsigned cellOrTurnstileId = 0);
     };
 }

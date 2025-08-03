@@ -8,4 +8,8 @@ namespace ticket {
     void Unlimited::print() const {
         std::cout << "Unlimited Ticket ID: " << std::endl;
     }
+
+    std::pair<TicketType, unsigned> Unlimited::getTypeAndId() const {
+        return {TicketType::Unlimited, id};
+    }
 }

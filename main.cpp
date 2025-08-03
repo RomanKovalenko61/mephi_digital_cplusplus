@@ -4,15 +4,15 @@
 #include "include/SkiPass.h"
 #include "include/Unlimited.h"
 #include "include/Timed.h"
+#include "include/InMemoryRepo.h"
 
 int main() {
-    setlocale(LC_CTYPE, "rus");
     ticket::Owner owner{"fio owner", 30, 'm'};
-    auto ticket = ticket::SkiPass::createTicket(ticket::TicketType::Unlimited, 1, owner, 100);
+    auto unlim_ticket = ticket::SkiPass::createTicket(ticket::TicketType::Unlimited, 1, owner, 100);
 
-    ticket->print();
+    unlim_ticket->print();
 
-    auto *unlim = dynamic_cast<ticket::Unlimited *>(ticket.get());
+    auto *unlim = dynamic_cast<ticket::Unlimited *>(unlim_ticket.get());
     if (unlim != nullptr) {
         unlim->getOwner().print_info(std::cout);
         (*unlim)({"new owner", 25, 'f'});
@@ -26,8 +26,8 @@ int main() {
     if (timed != nullptr) {
         std::cout << timed->getExpiredAtStr() << std::endl;
         auto change = timed->replenish(150);
-        std::cout << "Сдача: " << change << std::endl;
-        std::cout << "Осталось часов: " << timed->getRemains() << std::endl;
+        std::cout << "Change: " << change << std::endl;
+        std::cout << "Hours left: " << timed->getRemains() << std::endl;
         std::cout << timed->getExpiredAtStr() << std::endl;
     }
 
@@ -36,10 +36,19 @@ int main() {
     limited_ticket->print();
     auto *limited = dynamic_cast<ticket::Limited *>(limited_ticket.get());
     if (limited != nullptr) {
-        std::cout << "Осталось поездок: " << limited->getRemains() << std::endl;
+        std::cout << "Trips left: " << limited->getRemains() << std::endl;
         auto change = limited->replenish(250);
-        std::cout << "Сдача: " << change << std::endl;
-        std::cout << "Осталось поездок: " << limited->getRemains() << std::endl;
+        std::cout << "Change: " << change << std::endl;
+        std::cout << "Trips left: " << limited->getRemains() << std::endl;
+    }
+
+    ticket::MapRepoImpl repo;
+    repo.add(timed->getTypeAndId(), std::move(timed_ticker));
+    repo.add(unlim->getTypeAndId(), std::move(unlim_ticket));
+
+    for (auto &[key, value]: repo.copyStorage()) {
+        std::cout << "Key: " << static_cast<int>(key.first) << ", ID: " << key.second << std::endl;
+        value->print();
     }
 
     return 0;

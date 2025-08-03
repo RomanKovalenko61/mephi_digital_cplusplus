@@ -29,4 +29,8 @@ namespace ticket {
     void Timed::print() const {
         std::cout << "Timed Ticket ID: " << std::endl;
     }
+
+    std::pair<TicketType, unsigned> Timed::getTypeAndId() const {
+        return {TicketType::Timed, id};
+    }
 }

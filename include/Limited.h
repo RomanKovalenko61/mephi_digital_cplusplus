@@ -23,5 +23,7 @@ namespace ticket {
         unsigned getRemains() override;
 
         void print() const override;
+
+        std::pair<TicketType, unsigned> getTypeAndId() const override;
     };
 }

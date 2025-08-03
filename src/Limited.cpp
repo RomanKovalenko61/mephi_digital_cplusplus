@@ -16,4 +16,8 @@ namespace ticket {
         this->operator+=(transfer);
         return static_cast<float>(amount - transfer * price);
     }
+
+    std::pair<TicketType, unsigned> Limited::getTypeAndId() const {
+        return {TicketType::Limited, id};
+    }
 }
