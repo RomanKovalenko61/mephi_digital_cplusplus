@@ -10,7 +10,8 @@ namespace ticket {
 
     public:
         Timed(const unsigned id, const Owner &owner, const unsigned cellId)
-            : HavingCell(id, owner, cellId) {
+            : HavingCell(id, owner, cellId),
+              expiredAt(std::chrono::system_clock::now()) {
         }
 
         Timed &operator+=(const unsigned days) override {
