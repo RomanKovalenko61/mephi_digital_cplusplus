@@ -7,7 +7,7 @@ namespace ticket {
     }
 
     void Limited::print() const {
-        std::cout << "Limited Ticket ID: " << std::endl;
+        std::cout << "Limited Ticket with ID: " << id << std::endl;
     }
 
     float Limited::replenish(unsigned amount) {
@@ -19,5 +19,16 @@ namespace ticket {
 
     std::pair<TicketType, unsigned> Limited::getTypeAndId() const {
         return {TicketType::Limited, id};
+    }
+
+    bool Limited::canGoThrough(unsigned turnstileId) const {
+        return count > 0;
+    }
+
+    void Limited::goThrough(unsigned turnstileId) {
+        if (canGoThrough(turnstileId)) {
+            count--;
+            std::cout << "Timed Ticket go through turnstile with ID: " << turnstileId << std::endl;
+        }
     }
 }

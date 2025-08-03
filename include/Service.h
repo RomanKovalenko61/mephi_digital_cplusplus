@@ -17,5 +17,9 @@ namespace ticket {
         void print() const override;
 
         std::pair<TicketType, unsigned> getTypeAndId() const override;
+
+        bool canGoThrough(unsigned turnstileId) const override;
+
+        void goThrough(unsigned turnstileId) override;
     };
 }

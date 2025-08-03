@@ -27,10 +27,20 @@ namespace ticket {
     }
 
     void Timed::print() const {
-        std::cout << "Timed Ticket ID: " << std::endl;
+        std::cout << "Timed Ticket with ID: " << id << std::endl;
     }
 
     std::pair<TicketType, unsigned> Timed::getTypeAndId() const {
         return {TicketType::Timed, id};
+    }
+
+    bool Timed::canGoThrough(unsigned turnstileId) const {
+        return expiredAt > std::chrono::system_clock::now();
+    }
+
+    void Timed::goThrough(unsigned turnstileId) {
+        if (canGoThrough(turnstileId)) {
+            std::cout << "Timed Ticket go through turnstile with ID: " << turnstileId << std::endl;
+        }
     }
 }
