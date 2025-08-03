@@ -7,9 +7,15 @@
 #include "include/InMemoryRepo.h"
 #include "include/Service.h"
 
+unsigned ID = 1;
+
+unsigned generateId() {
+    return ID++;
+}
+
 int main() {
     ticket::Owner owner{"fio owner", 30, 'm'};
-    auto unlim_ticket = ticket::SkiPass::createTicket(ticket::TicketType::Unlimited, 1, owner, 100);
+    auto unlim_ticket = ticket::SkiPass::createTicket(ticket::TicketType::Unlimited, generateId(), owner, 100);
 
     unlim_ticket->print();
 
@@ -24,7 +30,7 @@ int main() {
 
     std::cout << " ----------------------------------------" << std::endl;
 
-    auto timed_ticker = ticket::SkiPass::createTicket(ticket::TicketType::Timed, 2, owner, 200);
+    auto timed_ticker = ticket::SkiPass::createTicket(ticket::TicketType::Timed, generateId(), owner, 200);
 
     timed_ticker->print();
     auto *timed = dynamic_cast<ticket::Timed *>(timed_ticker.get());
@@ -41,7 +47,7 @@ int main() {
 
     std::cout << " ----------------------------------------" << std::endl;
 
-    auto limited_ticket = ticket::SkiPass::createTicket(ticket::TicketType::Limited, 3, owner, 300);
+    auto limited_ticket = ticket::SkiPass::createTicket(ticket::TicketType::Limited, generateId(), owner, 300);
 
     limited_ticket->print();
     auto *limited = dynamic_cast<ticket::Limited *>(limited_ticket.get());
@@ -57,7 +63,7 @@ int main() {
 
     std::cout << " ----------------------------------------" << std::endl;
 
-    auto service_ticket = ticket::SkiPass::createTicket(ticket::TicketType::Service, 4, owner, 2);
+    auto service_ticket = ticket::SkiPass::createTicket(ticket::TicketType::Service, generateId(), owner, 2);
     service_ticket->print();
     auto *serviced = dynamic_cast<ticket::Service *>(service_ticket.get());
     if (serviced != nullptr) {
